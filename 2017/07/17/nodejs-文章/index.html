@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="node," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="快速搭建 Node.js 开发环境nvmnode,npm卸载安装之前，先删除全局的node和npm删除方法：如果是通过brew install node 安装的：首先通过brew uninstall node 卸载，然后删除系统剩余的node和node_modules  删除/usr/local/lib中的所有node和node_modules,npm  删除/usr/local/lib中的所有n">
+<meta name="keywords" content="node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs 文章">
+<meta property="og:url" content="http://ruoyun.vip/2017/07/17/nodejs-文章/index.html">
+<meta property="og:site_name" content="若云博客">
+<meta property="og:description" content="快速搭建 Node.js 开发环境nvmnode,npm卸载安装之前，先删除全局的node和npm删除方法：如果是通过brew install node 安装的：首先通过brew uninstall node 卸载，然后删除系统剩余的node和node_modules  删除/usr/local/lib中的所有node和node_modules,npm  删除/usr/local/lib中的所有n">
+<meta property="og:updated_time" content="2017-07-17T06:43:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs 文章">
+<meta name="twitter:description" content="快速搭建 Node.js 开发环境nvmnode,npm卸载安装之前，先删除全局的node和npm删除方法：如果是通过brew install node 安装的：首先通过brew uninstall node 卸载，然后删除系统剩余的node和node_modules  删除/usr/local/lib中的所有node和node_modules,npm  删除/usr/local/lib中的所有n">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ruoyun.vip/2017/07/17/nodejs-文章/"/>
+
+
+
+
+
+  <title>nodejs 文章 | 若云博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">若云博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ruoyun.vip/2017/07/17/nodejs-文章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="若云">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若云博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nodejs 文章</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T14:21:45+08:00">
+                2017-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="快速搭建-Node-js-开发环境nvm"><a href="#快速搭建-Node-js-开发环境nvm" class="headerlink" title="快速搭建 Node.js 开发环境nvm"></a>快速搭建 Node.js 开发环境<a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></h2><h3 id="node-npm卸载"><a href="#node-npm卸载" class="headerlink" title="node,npm卸载"></a>node,npm卸载</h3><p>安装之前，先删除全局的node和npm<br>删除方法：<br>如果是通过brew install node 安装的：<br>首先通过brew uninstall node 卸载，然后删除系统剩余的node和node_modules</p>
+<ol>
+<li><p>删除/usr/local/lib中的所有node和node_modules,npm</p>
+</li>
+<li><p>删除/usr/local/lib中的所有node和node_modules,npm的文件夹</p>
+</li>
+<li><p>检查~/中所有的local, lib或者include文件夹, 删除里面所有node和node_modules,npm</p>
+</li>
+<li><p>在/usr/local/bin中, 删除所有node,npm的可执行文件</p>
+</li>
+<li><p>最后运行以下代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo rm /usr/local/bin/npm</div><div class="line">sudo rm /usr/local/share/man/man1/node.1</div><div class="line">sudo rm /usr/local/lib/dtrace/node.d</div><div class="line">sudo rm -rf ~/.npm</div><div class="line">sudo rm -rf ~/.node-gyp</div><div class="line">sudo rm /opt/local/bin/node</div><div class="line">sudo rm /opt/local/include/node</div><div class="line">sudo rm -rf /opt/local/lib/node_modules</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行完毕后，重启终端，输入以下命令，查看是否卸载完毕<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm</div></pre></td></tr></table></figure></p>
+<h3 id="安装-nvm"><a href="#安装-nvm" class="headerlink" title="安装 nvm"></a>安装 nvm</h3><h4 id="通过https-github-com-creationix-nvm-方式推荐"><a href="#通过https-github-com-creationix-nvm-方式推荐" class="headerlink" title="通过https://github.com/creationix/nvm 方式推荐"></a>通过<a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a> 方式推荐</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</div></pre></td></tr></table></figure>
+<p>它会安装nvm,并自动会在.bashrc 文件中添加配置，傻瓜式安装</p>
+<h5 id="升级nvm"><a href="#升级nvm" class="headerlink" title="升级nvm"></a>升级nvm</h5><p>直接到官网复制命令安装一遍来更新。<br>参考：<a href="http://www.jianshu.com/p/045df8e20ebe" target="_blank" rel="external">http://www.jianshu.com/p/045df8e20ebe</a></p>
+<h4 id="通过brew安装，这种方法不推荐-会出现问题"><a href="#通过brew安装，这种方法不推荐-会出现问题" class="headerlink" title="通过brew安装，这种方法不推荐,会出现问题"></a>通过brew安装，这种方法不推荐,会出现<a href="https://www.v2ex.com/t/273237" target="_blank" rel="external">问题</a></h4><p>每次重新打开命令行工具都会出现这个问题，如果在.bashrc配置之后，并不能解决此问题</p>
+<p>1.通过brew install nvm<br>2.在mac配置 .bashrc 文件中添加<br>source $(brew –prefix nvm)/nvm.sh<br>3.在命令行中执行<br>source ~/.bashrc<br>4.重新打开你的终端, 输入 nvm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">$ nvm</div><div class="line"></div><div class="line">Node Version Manager</div><div class="line"></div><div class="line">Usage:</div><div class="line">    nvm help                    Show this message</div><div class="line">    nvm --version               Print out the latest released version of nvm</div><div class="line">    nvm install [-s] &lt;version&gt;  Download and install a &lt;version&gt;, [-s] from source</div><div class="line">    nvm uninstall &lt;version&gt;     Uninstall a version</div><div class="line">    nvm use &lt;version&gt;           Modify PATH to use &lt;version&gt;</div><div class="line">    nvm run &lt;version&gt; [&lt;args&gt;]  Run &lt;version&gt; with &lt;args&gt; as arguments</div><div class="line">    nvm current                 Display currently activated version</div><div class="line">    nvm ls                      List installed versions</div><div class="line">    nvm ls &lt;version&gt;            List versions matching a given description</div><div class="line">    nvm ls-remote               List remote versions available for install</div><div class="line">    nvm deactivate              Undo effects of NVM on current shell</div><div class="line">    nvm alias [&lt;pattern&gt;]       Show all aliases beginning with &lt;pattern&gt;</div><div class="line">    nvm alias &lt;name&gt; &lt;version&gt;  Set an alias named &lt;name&gt; pointing to &lt;version&gt;</div><div class="line">    nvm unalias &lt;name&gt;          Deletes the alias named &lt;name&gt;</div><div class="line">    nvm copy-packages &lt;version&gt; Install global NPM packages contained in &lt;version&gt; to current version</div><div class="line"></div><div class="line">Example:</div><div class="line">    nvm install v0.10.24        Install a specific version number</div><div class="line">    nvm use 0.10                Use the latest available 0.10.x release</div><div class="line">    nvm run 0.10.24 myApp.js    Run myApp.js using node v0.10.24</div><div class="line">    nvm alias default 0.10.24   Set default node version on a shell</div><div class="line"></div><div class="line">Note:</div><div class="line">    to remove, delete or uninstall nvm - just remove ~/.nvm, ~/.npm and ~/.bower folders</div></pre></td></tr></table></figure>
+<h3 id="使用-cnpm-加速-npm"><a href="#使用-cnpm-加速-npm" class="headerlink" title="使用 cnpm 加速 npm"></a>使用 cnpm 加速 npm</h3><p>同理 nvm , npm 默认是从国外的源获取和下载包信息, 不慢才奇怪. 可以通过简单的 —registry 参数, 使用国内的镜像 <a href="http://registry.npm.taobao.org" target="_blank" rel="external">http://registry.npm.taobao.org</a> :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install koa --registry=http://registry.npm.taobao.org</div></pre></td></tr></table></figure></p>
+<p>其他帮助文档：<a href="https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html" target="_blank" rel="external">https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html</a></p>
+<h3 id="安装切换各版本-node-npm"><a href="#安装切换各版本-node-npm" class="headerlink" title="安装切换各版本 node/npm"></a>安装切换各版本 node/npm</h3><p>nvm install stable #安装最新稳定版 node，现在是 8.1.0<br>nvm install 4.2.2 #安装 4.2.2 版本<br>nvm install 0.12.7 #安装 0.12.7 版本</p>
+<h5 id="特别说明：以下模块安装仅供演示说明，并非必须安装模块"><a href="#特别说明：以下模块安装仅供演示说明，并非必须安装模块" class="headerlink" title="特别说明：以下模块安装仅供演示说明，并非必须安装模块"></a>特别说明：以下模块安装仅供演示说明，并非必须安装模块</h5><p>nvm use 0 #切换至 0.12.7 版本<br>npm install -g mz-fis #安装 mz-fis 模块至全局目录，安装完成的路径是 /Users/&lt;你的用户名&gt;/.nvm/versions/node/v0.12.7/lib/mz-fis<br>nvm use 4 #切换至 4.2.2 版本<br>npm install -g react-native-cli #安装 react-native-cli 模块至全局目录，安装完成的路径是 /Users/&lt;你的用户名&gt;/.nvm/versions/node/v4.2.2/lib/react-native-cli</p>
+<p>nvm alias default 0.12.7 #设置默认 node 版本为 0.12.7</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>如果按照上面的流程安装之后，每次新打开的命令行，都要执行nvm use [版本]<br>怎么解决：nvm alias default [版本]//设置默认选中的版本</p>
+<h3 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h3><p><a href="http://www.imooc.com/article/14617" target="_blank" rel="external">http://www.imooc.com/article/14617</a><br><a href="http://www.cnblogs.com/kaiye/p/4937191.html" target="_blank" rel="external">http://www.cnblogs.com/kaiye/p/4937191.html</a><br><a href="https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html" target="_blank" rel="external">https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html</a></p>
+<h3 id="nvm常用指令"><a href="#nvm常用指令" class="headerlink" title="nvm常用指令"></a>nvm常用指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">nvm install &lt;version&gt; ## 安装指定版本，可模糊安装，如：安装v4.4.0，既可nvm install v4.4.0，又可nvm install 4.4</div><div class="line">nvm uninstall &lt;version&gt; ## 删除已安装的指定版本，语法与install类似</div><div class="line">nvm use &lt;version&gt; ## 切换使用指定的版本node</div><div class="line">nvm ls ## 列出所有安装的版本</div><div class="line">nvm ls-remote ## 列出所以远程服务器的版本（官方node version list）</div><div class="line">nvm current ## 显示当前的版本</div><div class="line">nvm alias &lt;name&gt; &lt;version&gt; ## 给不同的版本号添加别名</div><div class="line">nvm unalias &lt;name&gt; ## 删除已定义的别名</div><div class="line">nvm reinstall-packages &lt;version&gt; ## 在当前版本node环境下，重新全局安装指定版本号的npm包</div></pre></td></tr></table></figure>
+<h3 id="nrm切换源"><a href="#nrm切换源" class="headerlink" title="nrm切换源"></a><a href="https://github.com/Pana/nrm" target="_blank" rel="external">nrm</a>切换源</h3><p>开发的npm registry 管理工具 nrm,  能够查看和切换当前使用的registry, 最近NPM经常 down 掉, 这个还是很有用的哈哈</p>
+<p>我在国内使用npm init的时候会一直卡在那里，一直动不了，使用nrm,可以很方便的解决这个问题。建议在国内使用cnpm源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ npm install -g nrm</div><div class="line"></div><div class="line">$ nrm ls</div><div class="line"></div><div class="line">* npm ---- https://registry.npmjs.org/</div><div class="line">  cnpm --- http://r.cnpmjs.org/</div><div class="line">  eu ----- http://registry.npmjs.eu/</div><div class="line">  au ----- http://registry.npmjs.org.au/</div><div class="line">  sl ----- http://npm.strongloop.com/</div><div class="line">  nj ----- https://registry.nodejitsu.com/</div><div class="line">  </div><div class="line">$ nrm use cnpm //switch registry to cnpm</div><div class="line"></div><div class="line">  Registry has been set to: http://r.cnpmjs.org/</div><div class="line">    </div><div class="line">nrm help // show help</div><div class="line">nrm list // show all registries</div><div class="line">nrm use cnpm // switch to cnpm</div><div class="line">nrm home // go to a registry home page</div><div class="line">nrm test</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/node/" rel="tag"># node</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/17/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="若云" />
+          <p class="site-author-name" itemprop="name">若云</p>
+           
+              <p class="site-description motion-element" itemprop="description">我爱技术，技术好好~</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bugyun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速搭建-Node-js-开发环境nvm"><span class="nav-number">1.</span> <span class="nav-text">快速搭建 Node.js 开发环境nvm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#node-npm卸载"><span class="nav-number">1.1.</span> <span class="nav-text">node,npm卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-nvm"><span class="nav-number">1.2.</span> <span class="nav-text">安装 nvm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过https-github-com-creationix-nvm-方式推荐"><span class="nav-number">1.2.1.</span> <span class="nav-text">通过https://github.com/creationix/nvm 方式推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#升级nvm"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">升级nvm</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过brew安装，这种方法不推荐-会出现问题"><span class="nav-number">1.2.2.</span> <span class="nav-text">通过brew安装，这种方法不推荐,会出现问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-cnpm-加速-npm"><span class="nav-number">1.3.</span> <span class="nav-text">使用 cnpm 加速 npm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装切换各版本-node-npm"><span class="nav-number">1.4.</span> <span class="nav-text">安装切换各版本 node/npm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#特别说明：以下模块安装仅供演示说明，并非必须安装模块"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">特别说明：以下模块安装仅供演示说明，并非必须安装模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.5.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资料"><span class="nav-number">1.6.</span> <span class="nav-text">资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nvm常用指令"><span class="nav-number">1.7.</span> <span class="nav-text">nvm常用指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nrm切换源"><span class="nav-number">1.8.</span> <span class="nav-text">nrm切换源</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若云</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

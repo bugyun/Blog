@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>若云博客</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://ruoyun.vip/"/>
+  <updated>2017-07-17T06:43:22.000Z</updated>
+  <id>http://ruoyun.vip/</id>
+  
+  <author>
+    <name>若云</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nodejs 文章</title>
+    <link href="http://ruoyun.vip/2017/07/17/nodejs-%E6%96%87%E7%AB%A0/"/>
+    <id>http://ruoyun.vip/2017/07/17/nodejs-文章/</id>
+    <published>2017-07-17T06:21:45.000Z</published>
+    <updated>2017-07-17T06:43:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="快速搭建-Node-js-开发环境nvm"><a href="#快速搭建-Node-js-开发环境nvm" class="headerlink" title="快速搭建 Node.js 开发环境nvm"></a>快速搭建 Node.js 开发环境<a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></h2><h3 id="node-npm卸载"><a href="#node-npm卸载" class="headerlink" title="node,npm卸载"></a>node,npm卸载</h3><p>安装之前，先删除全局的node和npm<br>删除方法：<br>如果是通过brew install node 安装的：<br>首先通过brew uninstall node 卸载，然后删除系统剩余的node和node_modules</p>
+<ol>
+<li><p>删除/usr/local/lib中的所有node和node_modules,npm</p>
+</li>
+<li><p>删除/usr/local/lib中的所有node和node_modules,npm的文件夹</p>
+</li>
+<li><p>检查~/中所有的local, lib或者include文件夹, 删除里面所有node和node_modules,npm</p>
+</li>
+<li><p>在/usr/local/bin中, 删除所有node,npm的可执行文件</p>
+</li>
+<li><p>最后运行以下代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo rm /usr/local/bin/npm</div><div class="line">sudo rm /usr/local/share/man/man1/node.1</div><div class="line">sudo rm /usr/local/lib/dtrace/node.d</div><div class="line">sudo rm -rf ~/.npm</div><div class="line">sudo rm -rf ~/.node-gyp</div><div class="line">sudo rm /opt/local/bin/node</div><div class="line">sudo rm /opt/local/include/node</div><div class="line">sudo rm -rf /opt/local/lib/node_modules</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行完毕后，重启终端，输入以下命令，查看是否卸载完毕<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm</div></pre></td></tr></table></figure></p>
+<h3 id="安装-nvm"><a href="#安装-nvm" class="headerlink" title="安装 nvm"></a>安装 nvm</h3><h4 id="通过https-github-com-creationix-nvm-方式推荐"><a href="#通过https-github-com-creationix-nvm-方式推荐" class="headerlink" title="通过https://github.com/creationix/nvm 方式推荐"></a>通过<a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a> 方式推荐</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</div></pre></td></tr></table></figure>
+<p>它会安装nvm,并自动会在.bashrc 文件中添加配置，傻瓜式安装</p>
+<h5 id="升级nvm"><a href="#升级nvm" class="headerlink" title="升级nvm"></a>升级nvm</h5><p>直接到官网复制命令安装一遍来更新。<br>参考：<a href="http://www.jianshu.com/p/045df8e20ebe" target="_blank" rel="external">http://www.jianshu.com/p/045df8e20ebe</a></p>
+<h4 id="通过brew安装，这种方法不推荐-会出现问题"><a href="#通过brew安装，这种方法不推荐-会出现问题" class="headerlink" title="通过brew安装，这种方法不推荐,会出现问题"></a>通过brew安装，这种方法不推荐,会出现<a href="https://www.v2ex.com/t/273237" target="_blank" rel="external">问题</a></h4><p>每次重新打开命令行工具都会出现这个问题，如果在.bashrc配置之后，并不能解决此问题</p>
+<p>1.通过brew install nvm<br>2.在mac配置 .bashrc 文件中添加<br>source $(brew –prefix nvm)/nvm.sh<br>3.在命令行中执行<br>source ~/.bashrc<br>4.重新打开你的终端, 输入 nvm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">$ nvm</div><div class="line"></div><div class="line">Node Version Manager</div><div class="line"></div><div class="line">Usage:</div><div class="line">    nvm help                    Show this message</div><div class="line">    nvm --version               Print out the latest released version of nvm</div><div class="line">    nvm install [-s] &lt;version&gt;  Download and install a &lt;version&gt;, [-s] from source</div><div class="line">    nvm uninstall &lt;version&gt;     Uninstall a version</div><div class="line">    nvm use &lt;version&gt;           Modify PATH to use &lt;version&gt;</div><div class="line">    nvm run &lt;version&gt; [&lt;args&gt;]  Run &lt;version&gt; with &lt;args&gt; as arguments</div><div class="line">    nvm current                 Display currently activated version</div><div class="line">    nvm ls                      List installed versions</div><div class="line">    nvm ls &lt;version&gt;            List versions matching a given description</div><div class="line">    nvm ls-remote               List remote versions available for install</div><div class="line">    nvm deactivate              Undo effects of NVM on current shell</div><div class="line">    nvm alias [&lt;pattern&gt;]       Show all aliases beginning with &lt;pattern&gt;</div><div class="line">    nvm alias &lt;name&gt; &lt;version&gt;  Set an alias named &lt;name&gt; pointing to &lt;version&gt;</div><div class="line">    nvm unalias &lt;name&gt;          Deletes the alias named &lt;name&gt;</div><div class="line">    nvm copy-packages &lt;version&gt; Install global NPM packages contained in &lt;version&gt; to current version</div><div class="line"></div><div class="line">Example:</div><div class="line">    nvm install v0.10.24        Install a specific version number</div><div class="line">    nvm use 0.10                Use the latest available 0.10.x release</div><div class="line">    nvm run 0.10.24 myApp.js    Run myApp.js using node v0.10.24</div><div class="line">    nvm alias default 0.10.24   Set default node version on a shell</div><div class="line"></div><div class="line">Note:</div><div class="line">    to remove, delete or uninstall nvm - just remove ~/.nvm, ~/.npm and ~/.bower folders</div></pre></td></tr></table></figure>
+<h3 id="使用-cnpm-加速-npm"><a href="#使用-cnpm-加速-npm" class="headerlink" title="使用 cnpm 加速 npm"></a>使用 cnpm 加速 npm</h3><p>同理 nvm , npm 默认是从国外的源获取和下载包信息, 不慢才奇怪. 可以通过简单的 —registry 参数, 使用国内的镜像 <a href="http://registry.npm.taobao.org" target="_blank" rel="external">http://registry.npm.taobao.org</a> :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install koa --registry=http://registry.npm.taobao.org</div></pre></td></tr></table></figure></p>
+<p>其他帮助文档：<a href="https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html" target="_blank" rel="external">https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html</a></p>
+<h3 id="安装切换各版本-node-npm"><a href="#安装切换各版本-node-npm" class="headerlink" title="安装切换各版本 node/npm"></a>安装切换各版本 node/npm</h3><p>nvm install stable #安装最新稳定版 node，现在是 8.1.0<br>nvm install 4.2.2 #安装 4.2.2 版本<br>nvm install 0.12.7 #安装 0.12.7 版本</p>
+<h5 id="特别说明：以下模块安装仅供演示说明，并非必须安装模块"><a href="#特别说明：以下模块安装仅供演示说明，并非必须安装模块" class="headerlink" title="特别说明：以下模块安装仅供演示说明，并非必须安装模块"></a>特别说明：以下模块安装仅供演示说明，并非必须安装模块</h5><p>nvm use 0 #切换至 0.12.7 版本<br>npm install -g mz-fis #安装 mz-fis 模块至全局目录，安装完成的路径是 /Users/&lt;你的用户名&gt;/.nvm/versions/node/v0.12.7/lib/mz-fis<br>nvm use 4 #切换至 4.2.2 版本<br>npm install -g react-native-cli #安装 react-native-cli 模块至全局目录，安装完成的路径是 /Users/&lt;你的用户名&gt;/.nvm/versions/node/v4.2.2/lib/react-native-cli</p>
+<p>nvm alias default 0.12.7 #设置默认 node 版本为 0.12.7</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>如果按照上面的流程安装之后，每次新打开的命令行，都要执行nvm use [版本]<br>怎么解决：nvm alias default [版本]//设置默认选中的版本</p>
+<h3 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h3><p><a href="http://www.imooc.com/article/14617" target="_blank" rel="external">http://www.imooc.com/article/14617</a><br><a href="http://www.cnblogs.com/kaiye/p/4937191.html" target="_blank" rel="external">http://www.cnblogs.com/kaiye/p/4937191.html</a><br><a href="https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html" target="_blank" rel="external">https://fengmk2.com/blog/2014/03/node-env-and-faster-npm.html</a></p>
+<h3 id="nvm常用指令"><a href="#nvm常用指令" class="headerlink" title="nvm常用指令"></a>nvm常用指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">nvm install &lt;version&gt; ## 安装指定版本，可模糊安装，如：安装v4.4.0，既可nvm install v4.4.0，又可nvm install 4.4</div><div class="line">nvm uninstall &lt;version&gt; ## 删除已安装的指定版本，语法与install类似</div><div class="line">nvm use &lt;version&gt; ## 切换使用指定的版本node</div><div class="line">nvm ls ## 列出所有安装的版本</div><div class="line">nvm ls-remote ## 列出所以远程服务器的版本（官方node version list）</div><div class="line">nvm current ## 显示当前的版本</div><div class="line">nvm alias &lt;name&gt; &lt;version&gt; ## 给不同的版本号添加别名</div><div class="line">nvm unalias &lt;name&gt; ## 删除已定义的别名</div><div class="line">nvm reinstall-packages &lt;version&gt; ## 在当前版本node环境下，重新全局安装指定版本号的npm包</div></pre></td></tr></table></figure>
+<h3 id="nrm切换源"><a href="#nrm切换源" class="headerlink" title="nrm切换源"></a><a href="https://github.com/Pana/nrm" target="_blank" rel="external">nrm</a>切换源</h3><p>开发的npm registry 管理工具 nrm,  能够查看和切换当前使用的registry, 最近NPM经常 down 掉, 这个还是很有用的哈哈</p>
+<p>我在国内使用npm init的时候会一直卡在那里，一直动不了，使用nrm,可以很方便的解决这个问题。建议在国内使用cnpm源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ npm install -g nrm</div><div class="line"></div><div class="line">$ nrm ls</div><div class="line"></div><div class="line">* npm ---- https://registry.npmjs.org/</div><div class="line">  cnpm --- http://r.cnpmjs.org/</div><div class="line">  eu ----- http://registry.npmjs.eu/</div><div class="line">  au ----- http://registry.npmjs.org.au/</div><div class="line">  sl ----- http://npm.strongloop.com/</div><div class="line">  nj ----- https://registry.nodejitsu.com/</div><div class="line">  </div><div class="line">$ nrm use cnpm //switch registry to cnpm</div><div class="line"></div><div class="line">  Registry has been set to: http://r.cnpmjs.org/</div><div class="line">    </div><div class="line">nrm help // show help</div><div class="line">nrm list // show all registries</div><div class="line">nrm use cnpm // switch to cnpm</div><div class="line">nrm home // go to a registry home page</div><div class="line">nrm test</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;快速搭建-Node-js-开发环境nvm&quot;&gt;&lt;a href=&quot;#快速搭建-Node-js-开发环境nvm&quot; class=&quot;headerlink&quot; title=&quot;快速搭建 Node.js 开发环境nvm&quot;&gt;&lt;/a&gt;快速搭建 Node.js 开发环境&lt;a href=&quot;
+    
+    </summary>
+    
+    
+      <category term="node" scheme="http://ruoyun.vip/tags/node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://ruoyun.vip/2017/07/17/hello-world/"/>
+    <id>http://ruoyun.vip/2017/07/17/hello-world/</id>
+    <published>2017-07-17T03:21:06.000Z</published>
+    <updated>2017-07-17T03:21:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
